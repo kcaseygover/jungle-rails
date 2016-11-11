@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello, <%= @user.name %></h1>
+    <p>
+      Thank you for shopping at Jungle.
+      Here is your order receipt. %>
+    </p>
+    <br>
+    <p><% @line_items.each do |line_item| %></p>
+    <br>
+    <p><%= line_item.product.name %></p>
+    <br>
+    <p><%= line_item.product.description %></p>
+    <br>
+    <p><%= number_to_currency(line_item.product.price_cents / 100) %></p>
+    <br>
+    <p><%= line_item.quantity %></p>
+    <br>
+    <p><% total = number_to_currency(line_item.product.price_cents / 100 * line_item.quantity) %></p>
+    <br>
+    <p><%= total %></p>
+
+  <% end %>
+    <br>
+    <p>TOTAL: <% total_sales = @line_items.map do |item| %>
+            <% item.item_price_cents / 100 * item.quantity %>
+            <% end %>
+            <%= number_to_currency(total_sales.sum) %>
+    </p>
+
+  </body>
+</html>
