@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:create, :show]
 
   resources :products, only: [:index, :show] do
-    resources :reviews, only: [:create, :show]
+    resources :reviews, only: [:create]
   end
 
   namespace :admin do
