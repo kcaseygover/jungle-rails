@@ -27,18 +27,28 @@
 
     </div>
 
-    <div class="row">
-    <div class="col-sm-8">
-    <% @product.reviews.each do |review| %>
 
+    <div class=review>
+      <% if current_user %>
+        <%=form_for [@product, @review] do |f| %>
+        <%=f.text_area :description %>
+        <br>
+        <%= f.number_field :rating, in: 1...6 %>
+        <br>
+        <%=f.submit %>
+      <% end %>
+      <% end %>
 
-    <%= render 'review', review: review %>
-    <% end %>
-    </div>
-    </div>
+      <div class="row">
+        <div class="col-sm-8">
 
+          <% sort = @product.reviews.reverse %>
+          <% sort.each do |review| %>
+            <%= render 'review', review: review %>
+          <% end %>
+        </div>
 
-
+      </div>
 
     </div>
 
