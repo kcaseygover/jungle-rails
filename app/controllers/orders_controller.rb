@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-
     @line_items = @order.line_items
 
     @order_total = 0
@@ -16,8 +15,8 @@ class OrdersController < ApplicationController
     if order.valid?
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
-      respond_to do |format|
-        OrderMailer.receipt_email(@order.email).deliver_now
+
+      OrderMailer.receipt_email(order).deliver_later
 
     else
       redirect_to cart_path, error: order.errors.full_messages.first

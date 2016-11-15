@@ -1,12 +1,16 @@
 <dl class="dl-horizontal">
 <% if review.rating && review.description %>
-  <dt>Description</dt>
-  <dd><%= review.description %></dd>
-  <dt>Rating scale of 1-5</dt>
-  <dd><%= review.rating %></dd>
+  <dt>
   <% if (current_user && review.user_id == current_user.id) %>
-  <dt><%= link_to fa_icon('trash'), [@product,review], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %></dt>
-<% end %>
+    <%= link_to fa_icon('trash'), [@product,review], class: 'btn btn-sm btn-danger', method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
+  Review
+  </dt>
+  <dd><%= review.description %></dd>
+  <dt>Rating</dt>
+  <dd><%= review.rating %>/5</dd>
+
+
 <% end %>
 
 </dl>

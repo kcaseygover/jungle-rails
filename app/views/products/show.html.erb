@@ -27,24 +27,27 @@
 
     </div>
 
-
-    <div class=review >
+    <div class="row">
+    <div class="col-sm-4">
+    <div class=review>
 
       <% if current_user %>
 
-        <%=form_for [@product, @review] do |f| %>
-        <%=f.text_area :description %>
+      <div >
+        <%= form_for [@product, @review] do |f| %>
+        <h5>Your Review</h5>
+        <%=f.text_area :description%>
         <br>
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <%= f.number_field :rating, in: 1...6 %>
-          <span class="caret"></span>
-        </a>
-        <br>
-        <%=f.submit %>
+        <p><h5>Rate this product!</h5>
+          <%= f.number_field :rating, in: 1...6 %></p>
+        <%=f.submit "Submit", class: "btn btn-primary"%>
+        </div>
       <% end %>
       <% end %>
 
-      <div class="row">
+
+      </div>
+      </div>
         <div class="col-sm-8">
 
           <% sort = @product.reviews.reverse %>
@@ -52,8 +55,6 @@
             <%= render 'review', review: review %>
           <% end %>
         </div>
-
-      </div>
 
     </div>
 

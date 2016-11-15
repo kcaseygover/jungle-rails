@@ -4,12 +4,22 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hello, <%= @user.name %></h1>
-    <p>
-      Thank you for shopping at Jungle.
-      Here is your order receipt. %>
-    </p>
-    <br>
+    <h1>Thank you for shopping at Jungle</h1>
+    <p>Here is a summary of your order:</p>
+
+<p>
+<% @order.line_items.each do |item| %>
+
+
+<p><%=item.product.name%>: <%=item.quantity%> * <%=number_to_currency(item.item_price_cents/100) %> = <%=number_to_currency(item.total_price_cents/100) %>
+</p>
+
+<%end%>
+<p>
+Order Total: <%=number_to_currency(@order.total_cents/100)%>
+</p>
+</p>
+
 
   </body>
 </html>
